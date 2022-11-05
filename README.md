@@ -21,8 +21,8 @@
 | Column                     | Type       | Options                        |
 | -------------------------- | ---------  | ------------------------------ |
 | user                       | references | null: false, foreign_key: true |
-| item_name                  | string     | null: false                    |
-| product_description        | string     | null: false                    |  
+| name                       | string     | null: false                    |
+| product_description        | text       | null: false                    |  
 | category_id                | integer    | null: false                    |
 | condition_id               | integer    | null: false                    |
 | shipping_charge_id         | integer    | null: false                    |
