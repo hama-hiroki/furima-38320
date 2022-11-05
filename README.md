@@ -14,7 +14,6 @@
 ### Association
  has_many :items
  has_many :orders
- has_one  :profile
 
 
 ## items テーブル
@@ -27,7 +26,7 @@
 | category_id                | integer    | null: false                    |
 | condition_id               | integer    | null: false                    |
 | shipping_charge_id         | integer    | null: false                    |
-| region_of_origin_id        | integer    | null: false                    |
+| shipping_area_id           | integer    | null: false                    |
 | estimated_shipping_date_id | integer    | null: false                    |
 | price                      | integer    | null: false                    |
 
@@ -50,18 +49,17 @@ has_one    :profile
 
 ## profiles テーブル
 
-| Column          | Type          | Options                        |
-| --------------- | ------------- | ------------------------------ |
-| order           | references    | null: false, foreign_key: true |
-| post_code       | string        | null: false                    |
-| prefectures_id  | integer       | null: false                    |
-| municipalities  | string        | null: false                    |
-| address         | string        | null: false                    |
-| building_name   | string        |                                |
-| phone_number    | string        | null: false                    |
+| Column           | Type          | Options                        |
+| ---------------  | ------------- | ------------------------------ |
+| order            | references    | null: false, foreign_key: true |
+| post_code        | string        | null: false                    |
+| prefectures_id   | integer       | null: false                    |
+| shipping_area_id | integer       | null: false                    |
+| address          | string        | null: false                    |
+| building_name    | string        |                                |
+| phone_number     | string        | null: false                    |
 
 ### Association
-belongs_to :user
 belongs_to :order
 
 
