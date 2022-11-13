@@ -8,11 +8,11 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能テスト' do
     context '商品出品登録ができる時' do
-        it 'name、product_description、category_id、condition_id、shipping_charge_id、shipping_area_id、estimated_shipping_date_id、price、image が存在すれば登録できる' do
-          expect(@item).to be_valid
-        end
+      it 'name、product_description、category_id、condition_id、shipping_charge_id、shipping_area_id、estimated_shipping_date_id、price、image が存在すれば登録できる' do
+        expect(@item).to be_valid
+      end
     end
-  
+
     context '商品出品登録ができない時' do
       it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil
@@ -87,30 +87,28 @@ RSpec.describe Item, type: :model do
       it 'priceが空では登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it 'priceは300円以下では登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it 'priceは9999999円以上では登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it 'priceは全角数字では登録できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
       it 'priceは半角数字意外では登録できない' do
         @item.price = 'あア漢字ABC'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Half-width number")
+        expect(@item.errors.full_messages).to include('Price Half-width number')
       end
-      
-    end 
+    end
   end
 end
-
