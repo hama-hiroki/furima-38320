@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('public/image/output-image1.png')
   end
 
   describe '商品出品機能テスト' do
@@ -102,12 +101,12 @@ RSpec.describe Item, type: :model do
       it 'priceは全角数字では登録できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price Half-width number')
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it 'priceは半角数字意外では登録できない' do
         @item.price = 'あア漢字ABC'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price Half-width number')
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
     end
   end
