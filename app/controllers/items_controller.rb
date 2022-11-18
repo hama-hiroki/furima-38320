@@ -20,8 +20,7 @@ class ItemsController < ApplicationController
   end
     
   def show
-    @item = Item.find(params[:id])
-  end
+   end
 
   def edit
     redirect_to root_path unless current_user.id == @item.user_id
