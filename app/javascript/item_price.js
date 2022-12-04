@@ -8,4 +8,4 @@ window.addEventListener('load', function(){
     const profitDom = document.getElementById('profit');
     profitDom.innerHTML = Math.floor( parseInt(inputValue) - parseInt(addTaxDom.innerHTML) );
   })
-})
+});

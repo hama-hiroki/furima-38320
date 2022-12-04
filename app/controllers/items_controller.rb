@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index,:show]
-  before_action :set_item, only: [:show,:edit,:update,:destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :prevent_url, only: [:edit, :destroy]
 
   def index
-    @items = Item.all.order(created_at: "DESC")
+    @items = Item.all.order(created_at: 'DESC')
   end
 
   def new
@@ -18,16 +19,20 @@ class ItemsController < ApplicationController
       render :new
     end
   end
-    
+
   def show
-   end
+  end
 
   def edit
-    redirect_to root_path unless current_user.id == @item.user_id
+    if @item.user_id == current_user.id && @item.order.nil?
+    else
+      redirect_to root_path
+    end
   end
 
   def update
-    if @item.update(item_params)
+    @item.update(item_params)
+    if @item.valid?
       redirect_to item_path(@item.id)
     else
       render :edit
@@ -35,13 +40,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user_id
-      @item.destroy
-    end
-    
-      redirect_to root_path
-  end
+    @item.destroy if current_user.id == @item.user_id
 
+    redirect_to root_path
+  end
 
   private
 
@@ -51,8 +53,15 @@ class ItemsController < ApplicationController
                   :shipping_charge_id, :shipping_area_id, :estimated_shipping_date_id,
                   :price).merge(user_id: current_user.id)
   end
+
   def set_item
     @item = Item.find(params[:id])
   end
 
+  def prevent_url
+   if current_user.id == @item.user_id
+   else
+      redirect_to root_path 
+   end
+  end
 end

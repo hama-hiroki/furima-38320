@@ -127,6 +127,7 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
+    
     <% if @items.present? %>
       <% @items.each do |item| %>     
       <li class='list'>
@@ -135,9 +136,8 @@
           <%= image_tag item.image, class: "item-img" if item.image.attached?%>
 
           
-          <% if @items.present? %>
+          <% if item.order.present? %>
           <div class='sold-out'>
-          <% else %>
             <span>Sold Out!!</span>
           </div>
           <% end %>
