@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :estimated_shipping_date
 
   belongs_to :user
-  has_one   :order
+  has_one :order
   has_one_attached :image
 
   validates :image, presence: true
@@ -19,6 +19,6 @@ class Item < ApplicationRecord
   validates :shipping_area_id,    numericality: { other_than: 1, message: "can't be blank" }
   validates :estimated_shipping_date_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :price,
-             numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'Out of setting range' }
 end

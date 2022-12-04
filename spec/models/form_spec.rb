@@ -6,7 +6,7 @@ RSpec.describe Form, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @form = FactoryBot.build(:form, user_id: user.id, item_id: item.id)
-      sleep 0.1 
+      sleep 0.1
     end
 
     context '内容に問題ない場合' do
@@ -16,20 +16,20 @@ RSpec.describe Form, type: :model do
       it 'building_nameは空でも保存できること' do
         @form.building_name = ''
         expect(@form).to be_valid
-        end
+      end
     end
 
     context '内容に問題がある場合' do
       it 'post_codeが空だと保存できないこと' do
         @form.post_code = ''
         @form.valid?
-        expect(@form.errors.full_messages).to include("Post code can't be blank") 
+        expect(@form.errors.full_messages).to include("Post code can't be blank")
       end
 
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @form.post_code = '0000000'
         @form.valid?
-        expect(@form.errors.full_messages).to include("Post code 例）123-4567")
+        expect(@form.errors.full_messages).to include('Post code 例）123-4567')
       end
       it 'shipping_area_idを選択していないと保存できないこと' do
         @form.shipping_area_id = '0'
@@ -54,12 +54,12 @@ RSpec.describe Form, type: :model do
       it 'phone_numberが11文字以内でないと保存できないこと' do
         @form.phone_number = '000000000000'
         @form.valid?
-        expect(@form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@form.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'phone_numberが10文字以下では保存できないこと' do
         @form.phone_number = '000000000'
         @form.valid?
-        expect(@form.errors.full_messages).to include("Phone number is invalid")
+        expect(@form.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが空だと保存できないこと' do
         @form.token = ''
