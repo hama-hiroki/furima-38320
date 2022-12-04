@@ -61,6 +61,12 @@ RSpec.describe Form, type: :model do
         @form.valid?
         expect(@form.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberが半角以外が含まれている場合は購入できないこと' do
+        @form.phone_number = '０００００００００００'
+        @form.valid?
+        expect(@form.errors.full_messages).to include('Phone number is invalid')
+      end
+
       it 'tokenが空だと保存できないこと' do
         @form.token = ''
         @form.valid?
